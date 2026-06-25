@@ -1,35 +1,58 @@
-const form = document.getElementById("loginForm");
-const btn = document.getElementById("nextBtn");
+// ================================
+// LOGIN UNIWELF / UNIWELL
+// Usuario: Psicología
+// Contraseña: Ingeniería
+// ================================
 
-const USER = "Psicologia";
-const PASS = "Ingenieria";
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("loginForm");
+    const btn = document.getElementById("nextBtn");
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
+    if (!form || !btn) {
+        console.error("No se encontró el formulario o el botón de login.");
+        return;
+    }
 
-    const usuario = document.getElementById("usuario").value.trim();
-    const contrasena = document.getElementById("contrasena").value.trim();
+    function limpiarTexto(texto) {
+        return texto
+            .trim()
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+    }
 
-    btn.innerHTML = "Verificando...";
-    btn.style.opacity = "0.8";
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    setTimeout(() => {
-        if (usuario === USER && contrasena === PASS) {
-            btn.innerHTML = "Acceso Correcto ✓";
-            btn.style.background = "#16a380";
+        const usuario = limpiarTexto(document.getElementById("usuario").value);
+        const contrasena = limpiarTexto(document.getElementById("contrasena").value);
 
-            setTimeout(() => {
-                window.location.href = "presentacion.html";
-            }, 1000);
-        } else {
-            btn.innerHTML = "Credenciales incorrectas";
-            btn.style.background = "#c0392b";
+        btn.innerHTML = "Verificando...";
+        btn.style.opacity = "0.8";
+        btn.disabled = true;
 
-            setTimeout(() => {
-                btn.innerHTML = "Iniciar sesión";
-                btn.style.opacity = "1";
-                btn.style.background = "";
-            }, 2000);
-        }
-    }, 1200);
+        setTimeout(() => {
+            if (usuario === "psicologia" && contrasena === "ingenieria") {
+                // Esto es obligatorio porque presentacion.js revisa esta sesión
+                sessionStorage.setItem("uniwell_access", "granted");
+
+                btn.innerHTML = "Acceso Correcto ✓";
+                btn.style.background = "#16a380";
+
+                setTimeout(() => {
+                    window.location.href = "presentacion.html";
+                }, 700);
+            } else {
+                btn.innerHTML = "Credenciales incorrectas";
+                btn.style.background = "#c0392b";
+
+                setTimeout(() => {
+                    btn.innerHTML = "Iniciar sesión";
+                    btn.style.opacity = "1";
+                    btn.style.background = "";
+                    btn.disabled = false;
+                }, 1800);
+            }
+        }, 700);
+    });
 });
