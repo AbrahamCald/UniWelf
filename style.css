@@ -1,5 +1,6 @@
 /* =========================
    UNIWELL LOGIN STYLE
+   Fix responsive móvil
 ========================= */
 
 *{
@@ -9,22 +10,32 @@
     font-family:'Poppins',sans-serif;
 }
 
+html{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
 body{
+    width:100%;
+    max-width:100%;
     min-height:100vh;
+    min-height:100svh;
     display:flex;
     justify-content:center;
     align-items:center;
-
     background:
-    linear-gradient(
-        135deg,
-        #041f5f 0%,
-        #082b7a 50%,
-        #0f4aa1 100%
-    );
-
-    overflow:hidden;
+        radial-gradient(circle at 18% 15%, rgba(212,164,55,.16), transparent 26%),
+        radial-gradient(circle at 85% 80%, rgba(255,255,255,.10), transparent 24%),
+        linear-gradient(135deg,#041f5f 0%,#082b7a 50%,#0f4aa1 100%);
+    overflow-x:hidden;
+    overflow-y:auto;
     position:relative;
+}
+
+img{
+    display:block;
+    max-width:100%;
 }
 
 /* =========================
@@ -32,31 +43,33 @@ body{
 ========================= */
 
 .background-circle{
-    position:absolute;
+    position:fixed;
     border-radius:50%;
     background:rgba(212,164,55,.12);
     filter:blur(10px);
+    pointer-events:none;
+    z-index:0;
 }
 
 .circle1{
-    width:400px;
-    height:400px;
-    top:-120px;
-    left:-120px;
+    width:360px;
+    height:360px;
+    top:-130px;
+    left:-130px;
 }
 
 .circle2{
-    width:350px;
-    height:350px;
-    bottom:-120px;
-    right:-120px;
+    width:320px;
+    height:320px;
+    bottom:-130px;
+    right:-130px;
 }
 
 .circle3{
-    width:220px;
-    height:220px;
-    top:50%;
-    left:15%;
+    width:190px;
+    height:190px;
+    top:48%;
+    left:10%;
 }
 
 /* =========================
@@ -64,10 +77,22 @@ body{
 ========================= */
 
 .container{
+    width:min(1120px, 100%);
+    max-width:100%;
     display:flex;
+    justify-content:center;
     align-items:center;
     gap:60px;
+    padding:28px;
+    position:relative;
     z-index:10;
+}
+
+.character-section{
+    flex:0 0 auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 /* =========================
@@ -76,6 +101,8 @@ body{
 
 .character{
     width:300px;
+    max-width:100%;
+    height:auto;
     animation:float 4s ease-in-out infinite;
     filter:drop-shadow(0 10px 30px rgba(0,0,0,.35));
 }
@@ -86,20 +113,14 @@ body{
 
 .form-card{
     width:450px;
-
+    max-width:100%;
     padding:40px;
-
     background:rgba(255,255,255,.08);
-
     backdrop-filter:blur(25px);
-
+    -webkit-backdrop-filter:blur(25px);
     border:1px solid rgba(255,255,255,.15);
-
     border-radius:30px;
-
-    box-shadow:
-    0 25px 60px rgba(0,0,0,.25);
-
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
     animation:slideIn 1s ease;
 }
 
@@ -113,6 +134,7 @@ body{
     letter-spacing:4px;
     color:#ffffff;
     margin-bottom:10px;
+    word-break:normal;
 }
 
 .form-card p{
@@ -121,6 +143,7 @@ body{
     font-size:15px;
     margin-bottom:30px;
     opacity:.95;
+    line-height:1.6;
 }
 
 /* =========================
@@ -128,19 +151,14 @@ body{
 ========================= */
 
 .input-group{
+    width:100%;
     background:white;
-
     display:flex;
     align-items:center;
-
     padding:15px 18px;
-
     border-radius:14px;
-
     margin-bottom:18px;
-
     border:2px solid transparent;
-
     transition:.3s;
 }
 
@@ -148,22 +166,22 @@ body{
     color:#082b7a;
     margin-right:12px;
     font-size:18px;
+    flex:0 0 auto;
 }
 
 .input-group input{
     width:100%;
+    min-width:0;
     border:none;
     outline:none;
     font-size:15px;
     color:#333;
+    background:transparent;
 }
 
 .input-group:focus-within{
     border-color:#d4a437;
-
-    box-shadow:
-    0 0 18px rgba(212,164,55,.4);
-
+    box-shadow:0 0 18px rgba(212,164,55,.4);
     transform:translateY(-2px);
 }
 
@@ -173,39 +191,21 @@ body{
 
 button{
     width:100%;
-
     padding:16px;
-
     border:none;
-
     border-radius:14px;
-
-    background:
-    linear-gradient(
-        90deg,
-        #d4a437,
-        #f4d77a
-    );
-
+    background:linear-gradient(90deg,#d4a437,#f4d77a);
     color:#041f5f;
-
     font-size:16px;
-
     font-weight:700;
-
     cursor:pointer;
-
     transition:.3s;
-
-    box-shadow:
-    0 8px 25px rgba(212,164,55,.35);
+    box-shadow:0 8px 25px rgba(212,164,55,.35);
 }
 
 button:hover{
     transform:translateY(-3px);
-
-    box-shadow:
-    0 12px 35px rgba(212,164,55,.5);
+    box-shadow:0 12px 35px rgba(212,164,55,.5);
 }
 
 /* =========================
@@ -232,96 +232,157 @@ button:hover{
 ========================= */
 
 @keyframes float{
-
-    0%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-15px);
-    }
-
-    100%{
-        transform:translateY(0px);
-    }
-
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0px);}
 }
 
 @keyframes slideIn{
-
-    from{
-        opacity:0;
-        transform:translateX(80px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-
+    from{opacity:0;transform:translateX(80px);}
+    to{opacity:1;transform:translateX(0);}
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVE TABLET
 ========================= */
 
 @media(max-width:992px){
-
     .container{
         gap:30px;
-        padding:20px;
+        padding:24px;
     }
 
     .character{
-        width:220px;
+        width:230px;
     }
 
     .form-card{
-        width:400px;
+        width:410px;
     }
-
 }
 
-@media(max-width:768px){
+/* =========================
+   RESPONSIVE MÓVIL
+========================= */
 
+@media(max-width:768px){
     body{
-        padding:30px 15px;
+        display:block;
+        min-height:100svh;
+        padding:0;
     }
 
     .container{
+        width:100%;
+        min-height:100svh;
         flex-direction:column;
+        justify-content:flex-start;
+        align-items:center;
+        gap:22px;
+        padding:64px 16px 36px;
+        margin:0 auto;
+    }
+
+    .character-section{
         width:100%;
     }
 
     .character{
-        width:180px;
+        width:min(210px, 58vw);
+        margin:0 auto 8px;
     }
 
     .form-card{
         width:100%;
-        max-width:420px;
-        padding:30px 25px;
+        max-width:430px;
+        padding:28px 22px;
+        border-radius:26px;
+        margin:0 auto;
     }
 
     .form-card h1{
-        font-size:34px;
+        font-size:clamp(30px, 8vw, 38px);
+        letter-spacing:4px;
     }
 
+    .form-card p{
+        font-size:15px;
+        margin-bottom:26px;
+    }
+
+    .circle1{
+        width:260px;
+        height:260px;
+        top:-110px;
+        left:-120px;
+    }
+
+    .circle2{
+        width:260px;
+        height:260px;
+        bottom:-120px;
+        right:-120px;
+    }
+
+    .circle3{
+        display:none;
+    }
 }
 
 @media(max-width:480px){
+    .container{
+        padding:52px 14px 28px;
+        gap:18px;
+    }
 
     .character{
-        width:150px;
+        width:min(180px, 54vw);
     }
 
     .form-card{
-        padding:25px 18px;
-        border-radius:22px;
+        width:100%;
+        max-width:100%;
+        padding:24px 18px;
+        border-radius:24px;
     }
 
     .form-card h1{
         font-size:28px;
+        letter-spacing:3px;
     }
 
+    .form-card p{
+        font-size:14px;
+        line-height:1.55;
+    }
+
+    .input-group{
+        padding:14px 15px;
+        border-radius:16px;
+    }
+
+    .input-group input{
+        font-size:14px;
+    }
+
+    button{
+        padding:15px;
+        border-radius:16px;
+    }
+}
+
+@media(max-width:360px){
+    .container{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .form-card{
+        padding:22px 14px;
+    }
+
+    .form-card h1{
+        font-size:25px;
+        letter-spacing:2px;
+    }
 }
